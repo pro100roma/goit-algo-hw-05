@@ -1,6 +1,0 @@
-Alex Korp,3000
-Nikita Borisenko,2000
-Sitarama Raju,1000
-Shao Kahn,7000
-Sub Zero,4000
-Kung Lao,5000

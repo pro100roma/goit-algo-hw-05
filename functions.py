@@ -1,37 +1,31 @@
-# 
+import re
+from typing import Callable, Generator
+
 # TASK 1
-# 
-def total_salary(path):
-    try:
-        with open(path, "r", encoding="UTF-8") as developer:
-            salary_list = developer.readlines()
-            total_sum = 0
-            avg_salary = 0
-            for sal_str in salary_list:
-                salary = float(sal_str.strip().split(",")[1])
-                total_sum = total_sum + salary
-            avg_salary = f"{total_sum / len(salary_list):.2f}"
-            return (total_sum, avg_salary)
-    except FileNotFoundError:
-        print(f"Error: File not found at {path}")
+def caching_fibonacci():
+    cache = {}
+    def fibonacci(n):
+        if n <= 0: return 0
+        if n == 1: return 1
+        if n in cache: return cache[n]
+        
+        cache[n] = fibonacci(n - 1) + fibonacci(n - 2)
+        return cache[n]
+    return fibonacci
 
-# 
 # TASK 2
-# 
-def get_cats_info(path):
-    try:
-        with open(path, "r", encoding="UTF-8") as cats:
-            cats_list = cats.readlines()
-            cats_list_result = []
-            for cat_str in cats_list:
-                cat_list = cat_str.strip().split(",")
-                cat = {
-                    "id": cat_list[0],
-                    "name": cat_list[1],
-                    "age": cat_list[2]
-                }
-                cats_list_result.append(cat)
-            return cats_list_result
+def generator_numbers(text: str) -> Generator:
+    # regexp для пошуку дійсних чисел, відокремлених пробілами
+    # \s - пробіл перед числом
+    # \d+ - одна або більше цифр
+    # (?:\.\d+)? - необов'язкова десяткова частина
+    # \s - пробіл після числа
+    pattern = r'\s(\d+(?:\.\d+)?)\s'
 
-    except FileNotFoundError:
-        print(f"Error: File not found at {path}")
+    text_with_spaces = f' {text} '
+    for match in re.finditer(pattern, text_with_spaces):
+        yield float(match.group(1))
+
+
+def sum_profit(text: str, func: Callable[[str], Generator]) -> float:
+    return sum(func(text))

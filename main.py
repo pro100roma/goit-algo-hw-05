@@ -1,69 +1,22 @@
-# from functions import total_salary, get_cats_info
-
-def parse_input(user_input):
-    cmd, *args = user_input.split()
-    cmd = cmd.strip().lower()
-    return cmd, *args
-
-def add_contact(args, contacts):
-    name, phone = args
-    contacts[name] = phone
-    return "Contact added."
-
-def change_contact(args, contacts):
-    name, phone = args
-    if name in contacts:
-        contacts[name] = phone
-        return "Contact updated."
-    else:
-        return "Contact not found."
-
-def show_phone(args, contacts):
-    name = args[0]
-    if name in contacts:
-        return contacts[name]
-    else:
-        return "Contact not found."
-
-def show_all(contacts):
-    if not contacts:
-        return "No contacts saved."
-    result = []
-    for name, phone in contacts.items():
-        result.append(f"{name}: {phone}")
-    return "\n".join(result)
+# from functions import caching_fibonacci, generator_numbers, sum_profit
+from chatbot import chatbot
 
 def main():
-    # TASK 1
-    # total, average = total_salary("files/salaries.txt")
-    # print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
+    # # TASK 1
+    # print("TASK 1 Started")
+    # fib = caching_fibonacci()
+    # print(fib(15))
+    # print("TASK 1 Ended")
     
-    #TASK 2
-    # cats_info = get_cats_info("files/cats.txt")
-    # print(cats_info)
+    # # TASK 2
+    # print("TASK 2 started")
+    # text = "Загальний дохід працівника складається з декількох частин: 1000.01 як основний дохід, доповнений додатковими надходженнями 27.45 і 324.00 доларів."
+    # total_income = sum_profit(text, generator_numbers)
+    # print(f"Загальний дохід: {total_income}")
+    # print("TASK 2 Ended")
 
     # TASK 4
-    contacts = {}
-    print("Welcome to the assistant bot!")
-    while True:
-        user_input = input("Enter a command: ")
-        command, *args = parse_input(user_input)
-
-        if command in ["close", "exit"]:
-            print("Good bye!")
-            break
-        elif command == "hello":
-            print("How can I help you?")
-        elif command == "add":
-            print(add_contact(args, contacts))
-        elif command == "change":
-            print(change_contact(args, contacts))
-        elif command == "phone":
-            print(show_phone(args, contacts))
-        elif command == "all":
-            print(show_all(contacts))
-        else:
-            print("Invalid command.")
+    chatbot()
 
 if __name__ == "__main__":
     main()
