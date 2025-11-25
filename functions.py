@@ -16,14 +16,13 @@ def caching_fibonacci():
 # TASK 2
 def generator_numbers(text: str) -> Generator:
     # regexp для пошуку дійсних чисел, відокремлених пробілами
-    # \s - пробіл перед числом
+    # " " - звичайний пробіл перед числом
     # \d+ - одна або більше цифр
     # (?:\.\d+)? - необов'язкова десяткова частина
-    # \s - пробіл після числа
-    pattern = r'\s(\d+(?:\.\d+)?)\s'
+    # " " - звичайний пробіл після числа
+    pattern = r' (\d+(?:\.\d+)?) '
 
-    text_with_spaces = f' {text} '
-    for match in re.finditer(pattern, text_with_spaces):
+    for match in re.finditer(pattern, text):
         yield float(match.group(1))
 
 
